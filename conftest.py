@@ -33,12 +33,14 @@ def pytest_addoption(parser):
     parser.addoption(
         "--username",
         action="store",
+        # default="admin",
         default="kudimovaks@yandex.ru",
         help="enter username",
     ),
     parser.addoption(
         "--password",
         action="store",
+        # default="Vjcrdf2!",
         default="Capita_123",
         help="enter password",
     )
