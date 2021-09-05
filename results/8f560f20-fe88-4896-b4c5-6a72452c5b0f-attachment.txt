@@ -1,0 +1,1 @@
+2021-09-04 12:18:31 [32mINFO[0m User email is "lavrenti_1999@npo.biz, user password None"

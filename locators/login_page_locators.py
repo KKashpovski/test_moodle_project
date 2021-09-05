@@ -12,3 +12,4 @@ class LoginPageLocators:
     LOGIN_ERROR = (By.ID, "loginerrormessage")
     USER_MENU_SETTINGS = (By.ID, "actionmenuaction-5")
     CONFIRM_EXIT_BUTTON = (By.XPATH, "//button[text()='Выход']")
+    SIGN_UP_BUTTON = (By.CSS_SELECTOR, "#signup > button")

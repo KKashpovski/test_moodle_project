@@ -1,3 +1,7 @@
+"""Описание методов, которые можно использовать на каждой тестируемой странице."""
+
+
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.select import Select
@@ -11,6 +15,13 @@ class BasePage:
         element = WebDriverWait(self.app.driver, wait_time).until(
             EC.presence_of_element_located(locator),
             message=f"Can't find element by locator {locator}",
+        )
+        return element
+
+    def find_clickable_element(self, locator, wait_time=10):
+        element = WebDriverWait(self.app.driver, wait_time).until(
+            EC.element_to_be_clickable(locator),
+            message=f"Element not clickable {locator}",
         )
         return element
 
@@ -28,7 +39,14 @@ class BasePage:
         element.clear()
         if text:
             element.send_keys(text)
+            element.send_keys(Keys.RETURN)
             return element
 
     def click_element(self, element):
         element.click()
+
+    def make_screenshot(self):
+        return self.app.driver.get_screenshot_as_png()
+
+    def execute_js(self, js_script):
+        self.app.driver.execute_script(js_script)
