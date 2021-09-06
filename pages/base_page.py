@@ -1,7 +1,6 @@
 """Описание методов, которые можно использовать на каждой тестируемой странице."""
 
 
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.select import Select
@@ -39,7 +38,6 @@ class BasePage:
         element.clear()
         if text:
             element.send_keys(text)
-            element.send_keys(Keys.RETURN)
             return element
 
     def click_element(self, element):

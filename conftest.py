@@ -1,4 +1,6 @@
 import logging
+
+import allure
 import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -26,7 +28,7 @@ def app(request):
     logger.info(f"Start moodle {base_url} with headless={headless_mode} mode")
     if headless_mode == "true":
         chrome_options = Options()
-        chrome_options.headless = False
+        chrome_options.headless = True
         fixture = Application(
             webdriver.Chrome(ChromeDriverManager().install(), options=chrome_options), base_url,
         )
@@ -41,7 +43,28 @@ def app(request):
     fixture.quit()
 
 
-@pytest.fixture
+@pytest.hookimpl(tryfirst=True, hookwrapper=True)
+def pytest_runtest_makereport(item, call):
+    outcome = yield
+    rep = outcome.get_result()
+    if rep.when == "call" and rep.failed:
+        try:
+            if "app" in item.fixturenames:
+                web_driver = item.funcargs["app"]
+            else:
+                logger.error("Fail to take screen-shot")
+                return
+            logger.info('Screen-shot done')
+            allure.attach(
+                web_driver.driver.get_screenshot_as_png(),
+                name="screenshot",
+                attachment_type=allure.attachment_type.PNG,
+            )
+        except Exception as e:
+            logger.error("Fail to take screen-shot: {}".format(e))
+
+
+@pytest.fixture(scope="session")
 def auth(app, request):
     username = request.config.getoption("--username")
     password = request.config.getoption("--password")

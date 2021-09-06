@@ -1,6 +1,5 @@
 """Тестирование авторизации пользователя."""
 
-
 import pytest
 import allure
 from allure_commons.types import AttachmentType
@@ -8,6 +7,7 @@ from common.constants import LoginConstants
 from models.auth import AuthData
 
 
+@pytest.mark.authorisation
 class TestAuth:
     @allure.feature("authorisation")
     @allure.story("проверка на ввод существующего пользователя")
