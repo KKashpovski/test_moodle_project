@@ -1,7 +1,9 @@
+"""Интерактивное поведение страницы создания курса."""
+
+
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-
 from pages.base_page import BasePage
 from locators.create_course_page_locators import CreateCoursePageLocators
 

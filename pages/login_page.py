@@ -1,7 +1,8 @@
+"""Интерактивное поведение страницы авторизации."""
+
+
 import logging
-
 from selenium.webdriver.remote.webelement import WebElement
-
 from models.auth import AuthData
 from pages.base_page import BasePage
 from locators.login_page_locators import LoginPageLocators
@@ -12,7 +13,6 @@ logger = logging.getLogger("moodle")
 
 class LoginPage(BasePage):
     def is_auth(self):
-        """Проверка авторизован ли пользователь."""
         self.find_element(LoginPageLocators.FORM)
         element = self.find_elements(LoginPageLocators.USER_BUTTON)
         if len(element) > 0:
@@ -20,7 +20,6 @@ class LoginPage(BasePage):
         return False
 
     def confirm_exit_window(self):
-        """Найти кнопку "Выход" на странице."""
         self.find_element(LoginPageLocators.FORM)
         element = self.find_elements(LoginPageLocators.CONFIRM_EXIT_BUTTON)
         if len(element) > 0:
@@ -67,11 +66,11 @@ class LoginPage(BasePage):
     def auth_login_error(self) -> str:
         return self.find_element(LoginPageLocators.LOGIN_ERROR).text
 
-    def sign_up_button(self) -> WebElement:
-        return self.find_element(LoginPageLocators.SIGN_UP_BUTTON)
-
-    def go_to_sign_up_page(self):
-        self.click_element(self.sign_up_button())
+    # def sign_up_button(self) -> WebElement:
+    #     return self.find_element(LoginPageLocators.SIGN_UP_BUTTON)
+    #
+    # def go_to_sign_up_page(self):
+    #     self.click_element(self.sign_up_button())
 
     def sign_out(self):
         if self.is_auth():

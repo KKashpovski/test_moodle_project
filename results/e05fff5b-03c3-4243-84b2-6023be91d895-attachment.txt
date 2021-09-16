@@ -1,2 +1,0 @@
-2021-09-04 12:06:25 [32mINFO[0m User email is "florentin1999@mail.ru, user password None"
-2021-09-04 12:06:26 [32mINFO[0m User email is "florentin1999@mail.ru, user password None"

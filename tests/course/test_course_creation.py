@@ -1,8 +1,13 @@
+"""Добавление нового курса."""
+
+
+import pytest
 from common.constants import AccountConstants
 from models.auth import AuthData
 from models.create_course import CreateCourse
 
 
+@pytest.mark.create_course
 class TestCourseCreation:
     def test_valid_course_creation(self, app):
         app.open_main_page()

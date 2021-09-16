@@ -1,3 +1,6 @@
+"""Модель страницы авторизации."""
+
+
 from faker import Faker
 
 fake = Faker("Ru-ru")

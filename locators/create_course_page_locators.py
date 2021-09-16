@@ -1,3 +1,6 @@
+"""Локаторы страницы создания курса."""
+
+
 from selenium.webdriver.common.by import By
 
 
