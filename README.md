@@ -1,3 +1,5 @@
+https://app.travis-ci.com/KKashpovski/test_moodle_project.svg?token=JREwhsNjey9LCigDtVj6&branch=master
+
 # Тестирование самой популярной в мире системы управления обучением - Moodle.
 ![moodle_logo_small](https://user-images.githubusercontent.com/87300748/131994134-bdfd8bf2-db44-469c-8a73-7a5493cabf6e.png)
 
