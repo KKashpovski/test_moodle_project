@@ -75,9 +75,7 @@ class TestPersonalData:
         ), "Personal data should not be changed!"
 
     @allure.feature("add_or_edit_data")
-    @allure.story(
-        "Обновление персональных данных c некорректными именем и фамилией."
-    )
+    @allure.story("Обновление персональных данных c некорректными именем и фамилией.")
     @pytest.mark.parametrize(
         "name, last_name",
         [

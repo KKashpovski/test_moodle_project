@@ -68,8 +68,10 @@ class CreateCourse:
         )
         id_course = fake.iana_id()
         description_field = fake.text(max_nb_chars=200)
-        image_url = "https://sciencepop.ru/wp-content/uploads/" \
-                    "2019/10/933c25cb1c62fb6c94a02260705faf02.jpg"
+        image_url = (
+            "https://sciencepop.ru/wp-content/uploads/"
+            "2019/10/933c25cb1c62fb6c94a02260705faf02.jpg"
+        )
         group_mode = str(random.randint(0, 2))
         forced_group_mode = str(random.randint(0, 1))
         tags_courses = fake.word()
