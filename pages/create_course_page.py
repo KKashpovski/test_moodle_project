@@ -9,9 +9,13 @@ from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.wait import WebDriverWait
 
 from pages.base_page import BasePage
-from locators.create_course_page_locators import CreateCourseGeneralLocators, \
-    CreateCourseDescriptionLocators, CreateCourseImagesLocators, \
-    CreateCourseGroupsLocators, CreateCourseTagsLocators
+from locators.create_course_page_locators import (
+    CreateCourseGeneralLocators,
+    CreateCourseDescriptionLocators,
+    CreateCourseImagesLocators,
+    CreateCourseGroupsLocators,
+    CreateCourseTagsLocators,
+)
 
 
 logger = logging.getLogger("moodle")
