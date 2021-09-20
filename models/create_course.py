@@ -12,69 +12,76 @@ class CreateCourse:
     def __init__(
         self,
         full_course_name=None,
-        short_course_name=None,
+        course_name=None,
+        course_visibility=None,
+        begin_day=None,
+        begin_month=None,
+        begin_year=None,
         end_day=None,
         end_month=None,
         end_year=None,
-        end_hour=None,
-        end_minute=None,
-        course_description=None,
-        section_number=None,
-        course_language=None,
-        max_file_size=None,
-        manager_name=None,
-        teacher_name=None,
-        student_name=None,
+        id_course=None,
+        description_field=None,
+        image_url=None,
+        group_mode=None,
+        forced_group_mode=None,
+        tags_courses=None,
     ):
         self.full_course_name = full_course_name
-        self.short_course_name = short_course_name
+        self.course_name = course_name
+        self.course_visibility = course_visibility
+        self.begin_day = begin_day
+        self.begin_month = begin_month
+        self.begin_year = begin_year
         self.end_day = end_day
         self.end_month = end_month
         self.end_year = end_year
-        self.end_hour = end_hour
-        self.end_minute = end_minute
-        self.course_description = course_description
-        self.section_number = section_number
-        self.course_language = course_language
-        self.max_file_size = max_file_size
-        self.manager_name = manager_name
-        self.teacher_name = teacher_name
-        self.student_name = student_name
+        self.id_course = id_course
+        self.description_field = description_field
+        self.image_url = image_url
+        self.group_mode = group_mode
+        self.forced_group_mode = forced_group_mode
+        self.tags_courses = tags_courses
 
     @staticmethod
     def random():
-        full_course_name = fake.job()
-        short_course_name = fake.word()
-        end_day = str(random.randint(1, 31))
+        full_course_name = fake.bs()
+        course_name = fake.company_suffix()
+        course_visibility = str(random.randint(0, 1))
+        begin_day = str(random.randint(1, 28))
+        begin_month = str(random.randint(1, 12))
+        begin_year = str(
+            random.randint(
+                CreateCourseConstants.CURRENT_BEGIN_YEAR, CreateCourseConstants.LAST_BEGIN_YEAR
+            )
+        )
+        end_day = str(random.randint(1, 28))
         end_month = str(random.randint(1, 12))
         end_year = str(
             random.randint(
-                CreateCourseConstants.CURRENT_YEAR, CreateCourseConstants.LAST_YEAR
+                CreateCourseConstants.CURRENT_END_YEAR, CreateCourseConstants.LAST_END_YEAR
             )
         )
-        end_hour = str(random.randint(0, 23))
-        end_minute = str(random.randint(0, 59))
-        course_description = fake.text(max_nb_chars=200)
-        section_number = str(random.randint(0, CreateCourseConstants.SECTION_NUMBER))
-        course_language = CreateCourseConstants.COURSE_LANGUAGE
-        max_file_size = str(random.choice(CreateCourseConstants.FILE_SIZES_VALUES))
-        manager_name = fake.word()
-        teacher_name = fake.word()
-        student_name = fake.word()
+        id_course = fake.iana_id()
+        description_field = fake.text(max_nb_chars=200)
+        image_url = "https://sciencepop.ru/wp-content/uploads/2019/10/933c25cb1c62fb6c94a02260705faf02.jpg"
+        group_mode = str(random.randint(0, 2))
+        forced_group_mode = str(random.randint(0, 1))
+        tags_courses = fake.word()
         return CreateCourse(
             full_course_name,
-            short_course_name,
+            course_name,
+            course_visibility,
+            begin_day,
+            begin_month,
+            begin_year,
             end_day,
             end_month,
             end_year,
-            end_hour,
-            end_minute,
-            course_description,
-            section_number,
-            course_language,
-            max_file_size,
-            manager_name,
-            teacher_name,
-            student_name,
+            id_course,
+            description_field,
+            image_url,
+            group_mode,
+            forced_group_mode,
+            tags_courses,
         )
-    

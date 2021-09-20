@@ -1,12 +1,12 @@
-"""Применение фикстур для всех тестов проекта."""
-
-
 import logging
+
 import allure
 import pytest
+
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
+
 from pages.application import Application
 from models.auth import AuthData
 
@@ -62,21 +62,15 @@ def pytest_addoption(parser):
         help="enter base_url",
     ),
     parser.addoption(
-        "--username",
-        action="store",
-        default="kudimovaks@yandex.ru",
-        help="enter username",
+        "--username", action="store", default="kudimovaks@yandex.ru", help="enter username",
     ),
     parser.addoption(
-        "--password",
-        action="store",
-        default="Capita_123",
-        help="enter password",
-    )
+        "--password", action="store", default="Capita_123", help="enter password",
+    ),
 
 
 @pytest.hookimpl(tryfirst=True, hookwrapper=True)
-def pytest_runtest_makereport(item, call):
+def pytest_runtest_makereport(item):
     outcome = yield
     rep = outcome.get_result()
     if rep.when == "call" and rep.failed:

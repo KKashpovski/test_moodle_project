@@ -22,23 +22,9 @@ class PersonalDataConstants:
     )
 
 
-class AccountConstants:
-    ADMINISTRATION = "Администрирование"
-    COURSES = "Курсы"
-    CREATE_COURSE = "Добавить курс"
-
-
 class CreateCourseConstants:
-    SECTION_NUMBER = 52
-    COURSE_LANGUAGE = "ru"
-    CURRENT_YEAR = 2021
-    LAST_YEAR = 2050
-    FILE_SIZES_VALUES = [
-        0,
-        2097152,
-        1048576,
-        512000,
-        102400,
-        51200,
-        10240,
-    ]
+    CURRENT_BEGIN_YEAR = 2021
+    LAST_BEGIN_YEAR = 2023
+    CURRENT_END_YEAR = 2024
+    LAST_END_YEAR = 2050
+

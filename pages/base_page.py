@@ -1,10 +1,14 @@
 """Интерактивное поведение базовых элементов."""
 
 
+import logging
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.select import Select
+
+
+logger = logging.getLogger("moodle")
 
 
 class BasePage:
@@ -18,7 +22,7 @@ class BasePage:
         )
         return element
 
-    def find_clickable_element(self, locator, wait_time=10):
+    def find_clickable_element(self, locator, wait_time=20):
         element = WebDriverWait(self.app.driver, wait_time).until(
             EC.element_to_be_clickable(locator),
             message=f"Element not clickable {locator}",
@@ -61,3 +65,7 @@ class BasePage:
      
     def click_enter(self, element):
         element.send_keys(Keys.RETURN)
+
+    def get_element_text(self, element) -> str:
+        logger.info(f"{element.text}, {type(element.text)}")
+        return element.text

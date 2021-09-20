@@ -5,6 +5,7 @@ from selenium.webdriver.common.by import By
 
 
 class PersonalDataPageLocators:
+    DOWNLOAD_FILE_SECTION = (By.CSS_SELECTOR, "div:nth-of-type(4) > .nav-link > .fp-repo-name")
     EDIT_INFO = (By.CSS_SELECTOR, "a[href*='editadvanced']")
     BASIC_DATA = (By.ID, "id_moodle")
     NAME_INPUT = (By.ID, "id_firstname")

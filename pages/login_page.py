@@ -3,6 +3,8 @@
 
 import logging
 from selenium.webdriver.remote.webelement import WebElement
+
+from locators.admin_page_locators import CoursePageLocators
 from models.auth import AuthData
 from pages.base_page import BasePage
 from locators.login_page_locators import LoginPageLocators
@@ -63,14 +65,22 @@ class LoginPage(BasePage):
         self.click_element(self.user_menu_settings())
         self.click_element(self.find_element(PersonalDataPageLocators.EDIT_INFO))
 
+    def admin_menu(self) -> WebElement:
+        return self.find_element(LoginPageLocators.ADMIN_BUTTON)
+
+    def select_course_menu(self) -> WebElement:
+        return self.find_element(LoginPageLocators.ADMIN_BUTTON)
+
+    def go_to_editing_course_data(self):
+        self.click_element(self.admin_menu())
+        self.click_element(self.select_course_menu())
+        self.click_element(self.find_element(CoursePageLocators.COURSE_TUB))
+        self.click_element(self.find_element(CoursePageLocators.COURSE_CREATE_TUB))
+
+
+
     def auth_login_error(self) -> str:
         return self.find_element(LoginPageLocators.LOGIN_ERROR).text
-
-    # def sign_up_button(self) -> WebElement:
-    #     return self.find_element(LoginPageLocators.SIGN_UP_BUTTON)
-    #
-    # def go_to_sign_up_page(self):
-    #     self.click_element(self.sign_up_button())
 
     def sign_out(self):
         if self.is_auth():

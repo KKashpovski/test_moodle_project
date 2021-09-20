@@ -1,10 +1,9 @@
-"""Интерактивное поведение страницы добавления/обновления персональных данных."""
-
-
 import logging
+
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.wait import WebDriverWait
+
 from pages.base_page import BasePage
 from locators.personal_data_page_locators import (
     PersonalDataPageLocators,
@@ -40,7 +39,7 @@ class PersonalDataPage(BasePage):
     def city_input(self) -> WebElement:
         return self.find_element(PersonalDataPageLocators.CITY_INPUT)
 
-    def counry_select(self) -> WebElement:
+    def country_select(self) -> WebElement:
         country_select = self.find_select_element(
             PersonalDataPageLocators.COUNTRY_SELECT
         )
@@ -107,7 +106,7 @@ class PersonalDataPage(BasePage):
         self.fill_element(self.city_input(), city)
 
     def select_country(self, value):
-        self.select_value(self.counry_select(), value)
+        self.select_value(self.country_select(), value)
 
     def select_timezone(self, value):
         self.select_value(self.timezone_select(), value)

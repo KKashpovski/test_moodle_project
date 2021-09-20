@@ -1,157 +1,276 @@
-"""Интерактивное поведение страницы создания курса."""
+import logging
+import time
 
-
+from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+
 from pages.base_page import BasePage
-from locators.create_course_page_locators import CreateCoursePageLocators
+from locators.login_page_locators import *
+from locators.admin_page_locators import *
+from locators.create_course_page_locators import *
 
 
-class CreateCoursePage(BasePage):
-    def general_data(self) -> WebElement:
-        return self.find_element(CreateCoursePageLocators.GENERAL_DATA)
+logger = logging.getLogger("moodle")
 
-    def open_course_format_section(self):
-        self.click_element(
-            self.find_element(CreateCoursePageLocators.COURSE_FORMAT_DATA)
+
+class CreateCourseGeneral(BasePage):
+    def full_name_course(self) -> WebElement:
+        return self.find_clickable_element(CreateCourseGeneralLocators.FULL_NAME_COURSE)
+
+    def input_full_name_course(self, full_course_name) -> WebElement:
+        return self.fill_element(self.full_name_course(), full_course_name)
+
+    def name_course(self) -> WebElement:
+        return self.find_clickable_element(CreateCourseGeneralLocators.NAME_COURSE)
+
+    def input_name_course(self, course_name) -> WebElement:
+        return self.fill_element(self.name_course(), course_name)
+
+    def course_visibility(self) -> WebElement:
+        course_visibility = self.find_select_element(
+            CreateCourseGeneralLocators.COURSE_VISIBILITY
         )
+        return course_visibility
 
-    def open_appearance_section(self):
-        self.click_element(self.find_element(CreateCoursePageLocators.APPEARANCE_DATA))
+    def select_course_visibility(self, value):
+        return self.select_value(self.course_visibility(), value)
 
-    def open_file_section(self):
-        self.click_element(self.find_element(CreateCoursePageLocators.FILE_DATA))
+    def begin_day_course(self) -> WebElement:
+        begin_day_course = self.find_select_element(
+            CreateCourseGeneralLocators.BEGIN_DAY_COURSE
+        )
+        return begin_day_course
 
-    def open_role_rename_section(self):
-        self.click_element(self.find_element(CreateCoursePageLocators.ROLE_RENAME_DATA))
+    def begin_month_course(self) -> WebElement:
+        begin_month_course = self.find_select_element(
+            CreateCourseGeneralLocators.BEGIN_MONTH_COURSE
+        )
+        return begin_month_course
 
-    def full_course_name_input(self) -> WebElement:
-        return self.find_element(CreateCoursePageLocators.FULL_COURSE_NAME)
+    def begin_year_course(self) -> WebElement:
+        begin_year_course = self.find_select_element(
+            CreateCourseGeneralLocators.BEGIN_YEAR_COURSE
+        )
+        return begin_year_course
 
-    def short_course_name_input(self) -> WebElement:
-        return self.find_element(CreateCoursePageLocators.SHORT_COURSE_NAME)
+    def end_day_course(self) -> WebElement:
+        end_day_course = self.find_select_element(
+            CreateCourseGeneralLocators.END_DAY_COURSE
+        )
+        return end_day_course
 
-    def end_day_select(self) -> WebElement:
-        return self.find_select_element(CreateCoursePageLocators.END_DAY)
+    def end_month_course(self) -> WebElement:
+        end_month_course = self.find_select_element(
+            CreateCourseGeneralLocators.END_MONTH_COURSE
+        )
+        return end_month_course
 
-    def end_month_select(self) -> WebElement:
-        return self.find_select_element(CreateCoursePageLocators.END_MONTH)
+    def end_year_course(self) -> WebElement:
+        end_year_course = self.find_select_element(
+            CreateCourseGeneralLocators.END_YEAR_COURSE
+        )
+        return end_year_course
 
-    def end_year_select(self) -> WebElement:
-        return self.find_select_element(CreateCoursePageLocators.END_YEAR)
+    def id_course(self) -> WebElement:
+        return self.find_element(CreateCourseGeneralLocators.ID_COURSE)
 
-    def end_hour_select(self) -> WebElement:
-        return self.find_select_element(CreateCoursePageLocators.END_HOUR)
+    def save_button(self) -> WebElement:
+        return self.find_element(CreateCourseGeneralLocators.SAVE_BUTTON)
 
-    def end_minute_select(self) -> WebElement:
-        return self.find_select_element(CreateCoursePageLocators.END_MINUTE)
+    def select_begin_day_course(self, value):
+        return self.select_value(self.begin_day_course(), value)
 
-    def course_description_input(self) -> WebElement:
-        return self.find_element(CreateCoursePageLocators.COURSE_DESCRIPTION)
+    def select_begin_month_course(self, value):
+        self.select_value(self.begin_month_course(), value)
 
-    def section_number_select(self) -> WebElement:
-        return self.find_select_element(CreateCoursePageLocators.SECTION_NUMBER)
+    def select_begin_year_course(self, value):
+        self.select_value(self.begin_year_course(), value)
 
-    def course_language_select(self) -> WebElement:
-        return self.find_select_element(CreateCoursePageLocators.COURSE_LANGUAGE)
+    def select_end_day_course(self, value):
+        self.select_value(self.end_day_course(), value)
 
-    def max_file_size_select(self) -> WebElement:
-        return self.find_select_element(CreateCoursePageLocators.MAX_FILE_SIZE)
+    def select_end_month_course(self, value):
+        self.select_value(self.end_month_course(), value)
 
-    def manager_name_input(self) -> WebElement:
-        return self.find_element(CreateCoursePageLocators.MANAGER_NAME)
+    def select_end_year_course(self, value):
+        self.select_value(self.end_year_course(), value)
 
-    def teacher_name_input(self) -> WebElement:
-        return self.find_element(CreateCoursePageLocators.TEACHER_NAME)
+    def input_id_course(self, id) -> WebElement:
+        return self.fill_element(self.id_course(), id)
 
-    def student_name_input(self) -> WebElement:
-        return self.find_element(CreateCoursePageLocators.STUDENT_NAME)
-
-    def save_and_show_button(self):
-        return self.find_element(CreateCoursePageLocators.SAVE_AND_SHOW_BUTTON)
-
-    def input_full_course_name(self, name):
-        self.fill_element(self.full_course_name_input(), name)
-
-    def input_short_course_name(self, name):
-        self.fill_element(self.short_course_name_input(), name)
-
-    def select_end_day(self, value):
-        self.select_value(self.end_day_select(), value)
-
-    def select_end_month(self, value):
-        self.select_value(self.end_month_select(), value)
-
-    def select_end_year(self, value):
-        self.select_value(self.end_year_select(), value)
-
-    def select_end_hour(self, value):
-        self.select_value(self.end_hour_select(), value)
-
-    def select_end_minute(self, value):
-        self.select_value(self.end_minute_select(), value)
-
-    def input_course_description(self, text):
-        self.fill_element(self.course_description_input(), text)
-
-    def select_section_number(self, value):
-        self.select_value(self.section_number_select(), value)
-
-    def select_course_language(self, value):
-        self.select_value(self.course_language_select(), value)
-
-    def select_max_file_size(self, value):
-        self.select_value(self.max_file_size_select(), value)
-
-    def input_manager_name(self, name):
-        self.fill_element(self.manager_name_input(), name)
-
-    def input_teacher_name(self, name):
-        self.fill_element(self.teacher_name_input(), name)
-
-    def input_student_name(self, name):
-        self.fill_element(self.student_name_input(), name)
+    def submit_button(self) -> WebElement:
+        return self.find_element(CreateCourseGeneralLocators.SAVE_BUTTON)
 
     def submit_changes(self):
-        self.click_element(self.save_and_show_button())
+        self.click_element(self.submit_button())
 
-    def create_course(self, data):
-        self.input_full_course_name(data.full_course_name)
-        self.input_short_course_name(data.short_course_name)
-        self.select_end_day(data.end_day)
-        self.select_end_month(data.end_month)
-        self.select_end_year(data.end_year)
-        self.select_end_hour(data.end_hour)
-        self.select_end_minute(data.end_minute)
-        self.input_course_description(data.course_description)
-        self.open_course_format_section()
-        self.select_section_number(data.section_number)
-        self.open_appearance_section()
-        self.select_course_language(data.course_language)
-        self.open_file_section()
-        self.select_max_file_size(data.max_file_size)
-        self.open_role_rename_section()
-        self.input_manager_name(data.manager_name)
-        self.input_teacher_name(data.teacher_name)
-        self.input_student_name(data.student_name)
-        self.submit_changes()
-
-    def is_created(self, wait_time=10):
-        header_course_info_elements = WebDriverWait(self.app.driver, wait_time).until(
-            EC.presence_of_all_elements_located(
-                CreateCoursePageLocators.NEW_COURSE_HEADER
-            ),
-            message=f"Can't find elements by locator "
-            f"{CreateCoursePageLocators.NEW_COURSE_HEADER}",
+    def edit_course_data(self, data):
+        logger.info(
+            f"Editing course data with next values:\n"
+            f"full_course_name: {data.full_course_name}\n"
+            f"course_name: {data.course_name}\n"
+            f"course_visibility: {data.course_visibility}\n"
+            f"begin_day: {data.begin_day}\n"
+            f"begin_month: {data.begin_month}\n"
+            f"begin_year: {data.begin_year}\n"
+            f"end_day: {data.end_day}\n"
+            f"end_month: {data.end_month}\n"
+            f"end_year: {data.end_year}\n"
+            f"id_course: {data.id_course}\n"
         )
-        if len(header_course_info_elements) == 2:
+        self.input_full_name_course(data.full_course_name)
+        self.input_name_course(data.course_name)
+        self.select_course_visibility(data.course_visibility)
+        self.select_begin_day_course(data.begin_day)
+        self.select_begin_month_course(data.begin_month)
+        self.select_begin_year_course(data.begin_year)
+        self.select_end_day_course(data.end_day)
+        self.select_end_month_course(data.end_month)
+        self.select_end_year_course(data.end_year)
+        self.input_id_course(data.id_course)
+
+    def is_changed(self, wait_time=10):
+        header_user_info_elements = WebDriverWait(self.app.driver, wait_time).until(
+            EC.presence_of_all_elements_located(CreateCourseGeneralLocators.NAVBAR_ITEMS),
+            message=f"Can't find elements by locator "
+            f"{CreateCourseGeneralLocators.NAVBAR_ITEMS}",
+        )
+        if len(header_user_info_elements) == 4:
             return True
         else:
             return False
 
-    def create_course_page(self):
-        return self.find_element(CreateCoursePageLocators.CREATE_COURSE_HEADER).text
+    def is_created(self, course_name, wait_time=10):
+        header = self.find_element(CreateCourseGeneralLocators.COURSE_CREATE_HEADER)
+        header_text = self.get_element_text(header)
+        return header_text == course_name
 
-    def new_course_page(self):
-        return self.find_element(CreateCoursePageLocators.NEW_COURSE_HEADER).text
+
+class CreateCourseDescription(CreateCourseGeneral):
+    def description_field(self) -> WebElement:
+        return self.find_element(CreateCourseDescriptionLocators.DESCRIPTION_FIELD)
+
+    def input_description_course(self, text) -> WebElement:
+        return self.fill_element(self.description_field(), text)
+
+    def submit_button(self) -> WebElement:
+        return self.find_element(CreateCourseGeneralLocators.SAVE_BUTTON)
+
+    def submit_changes(self):
+        self.click_element(self.submit_button())
+
+    def edit_description_course_data(self, data):
+        logger.info(
+            f"input_description_course: {data.description_field}\n"
+        )
+        self.input_description_course(data.description_field)
+
+
+class CreateCourseImages(CreateCourseGeneral):
+    def open_image_menu_button(self) -> WebElement:
+        return self.find_clickable_element(
+            CreateCourseImagesLocators.OPEN_IMAGE_MENU_BUTTON
+        )
+
+    def download_files_input_url(self) -> WebElement:
+        return self.find_clickable_element(
+            CreateCourseImagesLocators.DOWNLOAD_FILES_BY_URL
+        )
+
+    def field_for_input_url(self) -> WebElement:
+        return self.find_clickable_element(
+            CreateCourseImagesLocators.FIELD_FOR_INPUT_URL
+        )
+
+    def download_button(self) -> WebElement:
+        return self.find_clickable_element(
+            CreateCourseImagesLocators.DOWNLOAD_BUTTON
+        )
+
+    def image_button(self) -> WebElement:
+        return self.find_clickable_element(
+            CreateCourseImagesLocators.IMAGE_BUTTON
+        )
+
+    def select_image_button(self) -> WebElement:
+        return self.find_clickable_element(
+            CreateCourseImagesLocators.SELECT_IMAGE_BUTTON
+        )
+
+    def edit_image_course(self, image_url):
+        logger.info(
+            f"url for download image: {image_url}\n"
+        )
+        self.click_element(self.open_image_menu_button())
+        self.click_element(self.download_files_input_url())
+        self.click_element(self.field_for_input_url())
+        self.fill_element(self.field_for_input_url(), image_url)
+        self.click_element(self.download_button())
+        self.click_element(self.image_button())
+        self.click_element(self.select_image_button())
+        time.sleep(3)
+
+
+class CreateCourseGroups(CreateCourseGeneral):
+    def groups_description(self) -> WebElement:
+        return self.find_clickable_element(
+            CreateCourseGroupsLocators.GROUPS_DESCRIPTION
+        )
+
+    def open_groups_description(self):
+        self.click_element(self.groups_description())
+
+    def group_mode(self) -> WebElement:
+        return self.find_select_element(
+            CreateCourseGroupsLocators.GROUP_MODE
+        )
+
+    def select_group_mode(self, value):
+        return self.select_value(self.group_mode(), value)
+
+    def forced_group_mode(self) -> WebElement:
+        return self.find_select_element(
+            CreateCourseGroupsLocators.FORCED_GROUP_MODE
+        )
+
+    def select_forced_group_mode(self, value):
+        return self.select_value(self.forced_group_mode(), value)
+
+    def edit_groups_info_course(self, data):
+        logger.info(
+            f"select_group_mode: {data.group_mode}\n"
+            f"select_forced_group_mode: {data.forced_group_mode}\n"
+        )
+        time.sleep(3)
+        self.open_groups_description()
+        time.sleep(5)
+        self.select_group_mode(data.group_mode)
+        time.sleep(5)
+        self.select_forced_group_mode(data.forced_group_mode)
+
+
+class CreateCourseTags(CreateCourseGeneral):
+    def tags_description(self) -> WebElement:
+        return self.find_clickable_element(
+            CreateCourseTagsLocators.TAGS_DESCRIPTION
+        )
+
+    def open_tags_description(self):
+        self.click_element(self.tags_description())
+
+    def tags_for_course(self) -> WebElement:
+        return self.find_clickable_element(
+            CreateCourseTagsLocators.TAGS_FOR_COURSE
+        )
+
+    def input_tags_for_course(self, word) -> WebElement:
+        return self.fill_element(self.tags_for_course(), word)
+
+    def edit_tags_course(self, data):
+        logger.info(
+            f"input_tags_for_course: {data.tags_courses}\n"
+        )
+        self.open_tags_description()
+        self.input_tags_for_course(data.tags_courses)
+        self.submit_changes()

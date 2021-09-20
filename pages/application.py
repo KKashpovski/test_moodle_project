@@ -1,5 +1,8 @@
 from pages.login_page import LoginPage
-from pages.personal_data_page import PersonalDataPage
+from pages.personal_data_page import PersonalDataPage, PersonalDataPageMore, \
+    PersonalDataPageOptional, PersonalDataPageTag
+from pages.create_course_page import CreateCourseGeneral, CreateCourseDescription, \
+    CreateCourseImages, CreateCourseGroups, CreateCourseTags
 
 
 class Application:
@@ -8,6 +11,14 @@ class Application:
         self.url = url
         self.login = LoginPage(self)
         self.personal_data = PersonalDataPage(self)
+        self.personal_data_more = PersonalDataPageMore(self)
+        self.personal_data_optional = PersonalDataPageOptional(self)
+        self.personal_data_tag = PersonalDataPageTag(self)
+        self.create_course_general = CreateCourseGeneral(self)
+        self.create_course_description = CreateCourseDescription(self)
+        self.create_course_images = CreateCourseImages(self)
+        self.create_course_groups = CreateCourseGroups(self)
+        self.create_course_tags = CreateCourseTags(self)
 
     def open_main_page(self):
         self.driver.get(self.url)

@@ -74,7 +74,7 @@ class PersonalData:
         country_code = fake.country_code()
         about = fake.text(max_nb_chars=200)
         url = fake.url()
-        image_url = fake.image_url()
+        image_url = fake.image_url(100, 100)
         name_phonetic = name
         lastnamephonetic = last_name
         middlename = fake.middle_name()
