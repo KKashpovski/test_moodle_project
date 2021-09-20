@@ -14,6 +14,12 @@ class TestCourseCreation:
     def test_general_data_course_creation(self, app, auth):
         """
         Steps
+        1. Open auth page
+        2. Auth with valid data
+        3. Check auth result
+        4. Go to course creation page
+        5. Add tag with valid data
+        6. Check successfully editing
         """
         app.login.go_to_editing_course_data()
         course_data = CD.random()
