@@ -1,3 +1,6 @@
+"""Локаторы страницы авторизации."""
+
+
 from selenium.webdriver.common.by import By
 
 
@@ -12,3 +15,5 @@ class LoginPageLocators:
     LOGIN_ERROR = (By.ID, "loginerrormessage")
     USER_MENU_SETTINGS = (By.ID, "actionmenuaction-5")
     CONFIRM_EXIT_BUTTON = (By.XPATH, "//button[text()='Выход']")
+    SIGN_UP_BUTTON = (By.CSS_SELECTOR, "#signup > button")
+    ADMIN_BUTTON = (By.CSS_SELECTOR, ".list-group.mt-1 > ul .media-body")
