@@ -46,4 +46,3 @@ https://qacoursemoodle.innopolis.university/
 ***
 Ссылка, где можно скачать всю документацию:
 https://github.com/KKashpovski/test_moodle_project
-
