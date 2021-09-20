@@ -36,6 +36,7 @@ class PersonalData:
         tag=None,
         user_image_description=None,
     ):
+        """Construct data."""
         self.name = name
         self.last_name = last_name
         self.email = email
@@ -62,6 +63,7 @@ class PersonalData:
 
     @staticmethod
     def random():
+        """Random data."""
         name = fake.first_name()
         last_name = fake.last_name()
         email = fake.email()

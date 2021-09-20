@@ -77,8 +77,6 @@ class LoginPage(BasePage):
         self.click_element(self.find_element(CoursePageLocators.COURSE_TUB))
         self.click_element(self.find_element(CoursePageLocators.COURSE_CREATE_TUB))
 
-
-
     def auth_login_error(self) -> str:
         return self.find_element(LoginPageLocators.LOGIN_ERROR).text
 
