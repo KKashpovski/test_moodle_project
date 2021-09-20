@@ -13,6 +13,7 @@ logger = logging.getLogger("moodle")
 
 class BasePage:
     def __init__(self, app):
+        """Construct data."""
         self.app = app
 
     def find_element(self, locator, wait_time=10):
@@ -62,7 +63,7 @@ class BasePage:
 
     def get_page_url(self):
         return self.app.driver.current_url
-     
+
     def click_enter(self, element):
         element.send_keys(Keys.RETURN)
 

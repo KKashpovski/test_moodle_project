@@ -1,3 +1,6 @@
+"""Страница создания курса."""
+
+
 import logging
 import time
 
@@ -6,9 +9,9 @@ from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.wait import WebDriverWait
 
 from pages.base_page import BasePage
-from locators.login_page_locators import *
-from locators.admin_page_locators import *
-from locators.create_course_page_locators import *
+from locators.create_course_page_locators import CreateCourseGeneralLocators, \
+    CreateCourseDescriptionLocators, CreateCourseImagesLocators, \
+    CreateCourseGroupsLocators, CreateCourseTagsLocators
 
 
 logger = logging.getLogger("moodle")
@@ -132,7 +135,9 @@ class CreateCourseGeneral(BasePage):
 
     def is_changed(self, wait_time=10):
         header_user_info_elements = WebDriverWait(self.app.driver, wait_time).until(
-            EC.presence_of_all_elements_located(CreateCourseGeneralLocators.NAVBAR_ITEMS),
+            EC.presence_of_all_elements_located(
+                CreateCourseGeneralLocators.NAVBAR_ITEMS
+            ),
             message=f"Can't find elements by locator "
             f"{CreateCourseGeneralLocators.NAVBAR_ITEMS}",
         )
@@ -161,9 +166,7 @@ class CreateCourseDescription(CreateCourseGeneral):
         self.click_element(self.submit_button())
 
     def edit_description_course_data(self, data):
-        logger.info(
-            f"input_description_course: {data.description_field}\n"
-        )
+        logger.info(f"input_description_course: {data.description_field}\n")
         self.input_description_course(data.description_field)
 
 
@@ -184,14 +187,10 @@ class CreateCourseImages(CreateCourseGeneral):
         )
 
     def download_button(self) -> WebElement:
-        return self.find_clickable_element(
-            CreateCourseImagesLocators.DOWNLOAD_BUTTON
-        )
+        return self.find_clickable_element(CreateCourseImagesLocators.DOWNLOAD_BUTTON)
 
     def image_button(self) -> WebElement:
-        return self.find_clickable_element(
-            CreateCourseImagesLocators.IMAGE_BUTTON
-        )
+        return self.find_clickable_element(CreateCourseImagesLocators.IMAGE_BUTTON)
 
     def select_image_button(self) -> WebElement:
         return self.find_clickable_element(
@@ -199,9 +198,7 @@ class CreateCourseImages(CreateCourseGeneral):
         )
 
     def edit_image_course(self, image_url):
-        logger.info(
-            f"url for download image: {image_url}\n"
-        )
+        logger.info(f"url for download image: {image_url}\n")
         self.click_element(self.open_image_menu_button())
         self.click_element(self.download_files_input_url())
         self.click_element(self.field_for_input_url())
@@ -222,17 +219,13 @@ class CreateCourseGroups(CreateCourseGeneral):
         self.click_element(self.groups_description())
 
     def group_mode(self) -> WebElement:
-        return self.find_select_element(
-            CreateCourseGroupsLocators.GROUP_MODE
-        )
+        return self.find_select_element(CreateCourseGroupsLocators.GROUP_MODE)
 
     def select_group_mode(self, value):
         return self.select_value(self.group_mode(), value)
 
     def forced_group_mode(self) -> WebElement:
-        return self.find_select_element(
-            CreateCourseGroupsLocators.FORCED_GROUP_MODE
-        )
+        return self.find_select_element(CreateCourseGroupsLocators.FORCED_GROUP_MODE)
 
     def select_forced_group_mode(self, value):
         return self.select_value(self.forced_group_mode(), value)
@@ -252,25 +245,19 @@ class CreateCourseGroups(CreateCourseGeneral):
 
 class CreateCourseTags(CreateCourseGeneral):
     def tags_description(self) -> WebElement:
-        return self.find_clickable_element(
-            CreateCourseTagsLocators.TAGS_DESCRIPTION
-        )
+        return self.find_clickable_element(CreateCourseTagsLocators.TAGS_DESCRIPTION)
 
     def open_tags_description(self):
         self.click_element(self.tags_description())
 
     def tags_for_course(self) -> WebElement:
-        return self.find_clickable_element(
-            CreateCourseTagsLocators.TAGS_FOR_COURSE
-        )
+        return self.find_clickable_element(CreateCourseTagsLocators.TAGS_FOR_COURSE)
 
     def input_tags_for_course(self, word) -> WebElement:
         return self.fill_element(self.tags_for_course(), word)
 
     def edit_tags_course(self, data):
-        logger.info(
-            f"input_tags_for_course: {data.tags_courses}\n"
-        )
+        logger.info(f"input_tags_for_course: {data.tags_courses}\n")
         self.open_tags_description()
         self.input_tags_for_course(data.tags_courses)
         self.submit_changes()

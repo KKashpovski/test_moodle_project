@@ -27,4 +27,3 @@ class CreateCourseConstants:
     LAST_BEGIN_YEAR = 2023
     CURRENT_END_YEAR = 2024
     LAST_END_YEAR = 2050
-
