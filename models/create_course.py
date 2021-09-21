@@ -47,8 +47,7 @@ class CreateCourse:
     @staticmethod
     def random():
         """Random data."""
-        f = str(random.randint(100000, 999999))
-        full_course_name = fake.bs() + f
+        full_course_name = fake.bs()
         course_name = fake.company_suffix()
         course_visibility = str(random.randint(0, 1))
         begin_day = str(random.randint(1, 28))
