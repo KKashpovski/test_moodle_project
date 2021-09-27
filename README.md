@@ -37,10 +37,62 @@ https://qacoursemoodle.innopolis.university/
 ***
 Для сборки и развертывания потребуется выполнить следующее:
 1. Открыть PyCharm
+
+Use python 3.9 +
+Create and activate virtual environments
+
+```
+python -m venv venv
+venv\Scripts\activate.bat
+```
+
 2. Клонировать проект на локальный ПК с удаленного репозитория
+
+```
+git clone https://github.com/KKashpovski/test_moodle_project.git
+```
+
 3. Установить Allure. Для этого нужно выполнить все инструкции, указанные в https://docs.qameta.io/allure/
-4. Установить все зависимости из документа "requirements.txt"
-5. Запустить pytest
+
+```
+pip install allure-pytest
+```
+
+4. Установить все зависимости:
+
+Run in terminal
+
+```
+pip install -r requirements.txt
+```
+
+or install poetry https://python-poetry.org/, then
+
+```
+poetry install
+```
+
+and add pre-commit
+```
+pre-commit install
+```
+
+5. Запустить pytest:
+
+Запуск тестов
+```
+pytest tests/
+```
+
+или выполнить запуск тестов с выводом отчетов allure
+
+```
+py.test --alluredir=allure_result_folder ./tests
+```
+
+```
+allure serve allure_result_folder
+```
 
 ## Ссылки на документацию
 ***
