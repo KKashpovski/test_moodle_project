@@ -58,10 +58,6 @@ git clone https://github.com/KKashpovski/test_moodle_project.git
 pip install allure-pytest
 ```
 
-```
-py.test --alluredir=allure_result_folder ./tests
-```
-
 4. Установить все зависимости:
 
 Run in terminal
@@ -89,6 +85,11 @@ pytest tests/
 ```
 
 или выполнить запуск тестов с выводом отчетов allure
+
+```
+pytest --alluredir=allure_result_folder ./tests
+```
+
 ```
 allure serve allure_result_folder
 ```
