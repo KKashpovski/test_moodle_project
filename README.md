@@ -79,7 +79,7 @@ pre-commit install
 
 5. Запустить pytest:
 
-Запуск тестов 
+Запуск тестов
 ```
 pytest tests/
 ```
@@ -87,7 +87,7 @@ pytest tests/
 или выполнить запуск тестов с выводом отчетов allure
 
 ```
-pytest --alluredir=allure_result_folder ./tests
+py.test --alluredir=allure_result_folder ./tests
 ```
 
 ```
