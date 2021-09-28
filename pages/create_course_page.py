@@ -150,7 +150,7 @@ class CreateCourseGeneral(BasePage):
         else:
             return False
 
-    def is_created(self, course_name, wait_time=10):
+    def is_created(self, course_name, wait_time=60):
         header = self.find_element(CreateCourseGeneralLocators.COURSE_CREATE_HEADER)
         header_text = self.get_element_text(header)
         return header_text == course_name
