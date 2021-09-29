@@ -9,7 +9,7 @@ from models.auth import AuthData
 
 @pytest.mark.authorisation
 class TestAuth:
-    @allure.testcase('TC-1')
+    @allure.testcase("TC-1")
     @allure.feature("authorisation")
     @allure.story("проверка на ввод существующего пользователя")
     def test_auth_valid_data(self, app):
@@ -25,7 +25,7 @@ class TestAuth:
         app.login.auth(data)
         assert app.login.is_auth(), "We are not auth"
 
-    @allure.testcase('TC-2')
+    @allure.testcase("TC-2")
     @allure.feature("authorisation")
     @allure.story("проверка на ввод несуществующего пользователя")
     def test_auth_invalid_data(self, app):
@@ -41,8 +41,8 @@ class TestAuth:
         app.login.auth(data)
         assert LoginConstants.AUTH_ERROR == app.login.auth_login_error(), "We are auth!"
 
-    @allure.testcase('TC-3')
-    @allure.testcase('TC-4')
+    @allure.testcase("TC-3")
+    @allure.testcase("TC-4")
     @allure.feature("authorisation")
     @allure.story("проверка на ввод пустых полей")
     @pytest.mark.parametrize("field", ["login", "password"])
