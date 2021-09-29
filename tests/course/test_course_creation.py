@@ -8,6 +8,7 @@ from models.create_course import CreateCourse as CD
 
 @pytest.mark.create_course
 class TestCourseCreation:
+    @allure.testcase('TC-15')
     @allure.feature("create_course")
     @allure.story("Добавление основной информации о курсе")
     def test_general_data_course_creation(self, app, auth):
