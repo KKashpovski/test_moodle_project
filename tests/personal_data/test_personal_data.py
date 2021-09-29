@@ -12,7 +12,7 @@ user_images_directory = os.path.join(current_dir, "user_images")
 
 @pytest.mark.personal_data
 class TestPersonalData:
-    @allure.testcase('TC-5')
+    @allure.testcase("TC-5")
     @allure.feature("add_or_edit_data")
     @allure.story("Добавление основных персональных данных")
     def test_valid_edit_basic_personal_data(self, app, auth):
@@ -31,9 +31,9 @@ class TestPersonalData:
         app.personal_data.edit_personal_data(personal_data)
         assert app.personal_data.is_changed(), "Personal data not changed!"
 
-    @allure.testcase('TC-6')
-    @allure.testcase('TC-7')
-    @allure.testcase('TC-8')
+    @allure.testcase("TC-6")
+    @allure.testcase("TC-7")
+    @allure.testcase("TC-8")
     @allure.feature("add_or_edit_data")
     @allure.story("Обновление персональных данных обязательных полей")
     @pytest.mark.parametrize("field", ["name", "last_name", "email"])
@@ -56,7 +56,7 @@ class TestPersonalData:
             not app.personal_data.is_changed()
         ), "Personal data should not be changed!"
 
-    @allure.testcase('TC-9')
+    @allure.testcase("TC-9")
     @allure.feature("add_or_edit_data")
     @allure.story("Обновление персональных данных с некорректным email")
     @pytest.mark.parametrize("email", ["kudimovaks.ru", "@yandex.ru", "111"])
@@ -79,7 +79,7 @@ class TestPersonalData:
             not app.personal_data.is_changed()
         ), "Personal data should not be changed!"
 
-    @allure.testcase('TC-10')
+    @allure.testcase("TC-10")
     @allure.feature("add_or_edit_data")
     @allure.story("Обновление персональных данных c некорректными именем и фамилией.")
     @pytest.mark.parametrize(
@@ -114,7 +114,7 @@ class TestPersonalData:
             not app.personal_data.is_changed()
         ), "Personal data should not be changed!"
 
-    @allure.testcase('TC-11')
+    @allure.testcase("TC-11")
     @allure.feature("add_or_edit_data")
     @allure.story("Добавление изображения пользователя")
     @pytest.mark.set_user_image
@@ -143,7 +143,7 @@ class TestPersonalData:
         )
         assert app.personal_data.is_user_image_changed(), "User image not changed!"
 
-    @allure.testcase('TC-12')
+    @allure.testcase("TC-12")
     @allure.feature("add_or_edit_data")
     @allure.story("Добавление персональных данных дополнительной информации об имени")
     def test_valid_edit_more_personal_data(self, app, auth):
@@ -162,7 +162,7 @@ class TestPersonalData:
         app.personal_data_more.edit_personal_data_more(personal_data)
         assert app.personal_data_more.is_changed(), "Personal data not changed!"
 
-    @allure.testcase('TC-13')
+    @allure.testcase("TC-13")
     @allure.feature("add_or_edit_data")
     @allure.story("Добавление персональных данных об интересах")
     def test_valid_edit_tag_personal_data(self, app, auth):
@@ -182,7 +182,7 @@ class TestPersonalData:
         app.personal_data_tag.edit_personal_data_tag(personal_data)
         assert app.personal_data_tag.is_changed(), "Personal data not changed!"
 
-    @allure.testcase('TC-14')
+    @allure.testcase("TC-14")
     @allure.feature("add_or_edit_data")
     @allure.story("Добавление персональных данных о необязательной информации")
     def test_valid_edit_optional_personal_data(self, app, auth):
